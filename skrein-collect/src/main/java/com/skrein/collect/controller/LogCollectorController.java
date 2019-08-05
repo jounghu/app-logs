@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -35,21 +36,34 @@ public class LogCollectorController {
     public String collectStartup(@RequestBody StartupLog startupLog) {
         System.out.println("starupLog: " + JSON.toJSONString(startupLog));
         sendToKafka(JSON.toJSONString(startupLog), "startuplog");
+        log.debug(toFileLog(JSON.toJSONString(startupLog)));
         return "ok";
+    }
+
+
+    private String toFileLog(String startupLog) {
+        JSONObject jsonObject = JSON.parseObject(startupLog);
+        Collection<Object> values = jsonObject.values();
+        StringBuilder sb = new StringBuilder();
+        values.forEach(e -> sb.append(e).append("\001"));
+        // remove last \001
+        return sb.substring(0, sb.toString().length() - "\001".length());
     }
 
 
     @RequestMapping(value = "/pvlog")
     public String collectPV(@RequestBody PageVisitLog pageVisitLog) {
         System.out.println("pageVisitLog: " + JSON.toJSONString(pageVisitLog));
-        sendToKafka(JSON.toJSONString(pageVisitLog),"pageVisitLog");
+        sendToKafka(JSON.toJSONString(pageVisitLog), "pageVisitLog");
+        log.info(toFileLog(JSON.toJSONString(pageVisitLog)));
         return "ok";
     }
 
     @RequestMapping(value = "/errorlog")
     public String collectError(@RequestBody ErrorLog errorLog) {
         System.out.println("errorLog: " + JSON.toJSONString(errorLog));
-        sendToKafka(JSON.toJSONString(errorLog),"errorLog");
+        sendToKafka(JSON.toJSONString(errorLog), "errorLog");
+        log.error(toFileLog(JSON.toJSONString(errorLog)));
         return "ok";
     }
 
