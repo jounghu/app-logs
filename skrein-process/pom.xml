@@ -8,48 +8,45 @@
     <artifactId>skrein-process</artifactId>
     <version>1.0.0</version>
 
+    <dependencies>
 
-   <dependencyManagement>
-       <dependencies>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
 
-           <dependency>
-               <groupId>org.apache.spark</groupId>
-               <artifactId>spark-core_2.11</artifactId>
-               <version>2.1.1</version>
-           </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
 
-           <dependency>
-               <groupId>org.apache.spark</groupId>
-               <artifactId>spark-sql_2.11</artifactId>
-               <version>2.1.1</version>
-           </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
 
-           <dependency>
-               <groupId>mysql</groupId>
-               <artifactId>mysql-connector-java</artifactId>
-               <version>8.0.16</version>
-           </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
 
-           <dependency>
-               <groupId>org.apache.spark</groupId>
-               <artifactId>spark-streaming_2.11</artifactId>
-               <version>2.1.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.apache.spark</groupId>
-               <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
-               <version>2.1.1</version>
-           </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
 
 
-           <dependency>
-               <groupId>junit</groupId>
-               <artifactId>junit</artifactId>
-               <version>4.12</version>
-           </dependency>
-       </dependencies>
-   </dependencyManagement>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>WordCount</finalName>
         <plugins>
